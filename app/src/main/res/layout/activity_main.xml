@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="yaseerfarah22.com.nearby.View.MainActivity"
+    android:background="@color/colorPrimary"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/home_bar"
+
+
+
+            >
+
+                <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/home_toolbar"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textSize="22sp"
+
+                        android:textColor="@color/colorAccent"
+                        android:layout_gravity="center"
+                        android:id="@+id/toolbar_title" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reltime_btn"
+                        android:background="@drawable/button_transition"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"
+                        >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RealTime"
+                        android:textSize="13sp"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+
+
+                         />
+
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.Toolbar>
+
+
+
+
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <com.gturedi.views.StatefulLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/stateful"
+            android:layout_below="@+id/home_bar"
+            app:stfAnimationEnabled="true"
+            app:stfInAnimation="@android:anim/slide_in_left"
+            app:stfOutAnimation="@android:anim/slide_out_right"
+
+            >
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/near_list"
+
+        >
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+        </com.gturedi.views.StatefulLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

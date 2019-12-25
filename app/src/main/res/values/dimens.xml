@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title_margin">160dp</dimen>
+    <dimen name="cardview_hight">130dp</dimen>
+    <dimen name="card_image_width">110dp</dimen>
+    <dimen name="card_title_size">18sp</dimen>
+    <dimen name="card_address_size">16sp</dimen>
+
+</resources>

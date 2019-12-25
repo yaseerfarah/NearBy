@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="cardview_hight">140dp</dimen>
+    <dimen name="card_image_width">130dp</dimen>
+    <dimen name="card_title_size">20sp</dimen>
+    <dimen name="card_address_size">17sp</dimen>
+</resources>
