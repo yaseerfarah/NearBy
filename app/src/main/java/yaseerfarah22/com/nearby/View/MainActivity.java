@@ -50,6 +50,10 @@ import static yaseerfarah22.com.nearby.Constants.maxDistance;
 public class MainActivity extends AppCompatActivity implements NetworkConnection,EmptyState,GPSConnection {
 
 
+    private CustomStateOptions networkCustom=new CustomStateOptions().image(R.drawable.ic_cloud_off_black_24dp);
+    private CustomStateOptions noDataCustom=new CustomStateOptions().image(R.drawable.ic_error_outline_black_24dp);
+    private CustomStateOptions noGPSCustom=new CustomStateOptions().image(R.drawable.ic_gps_off_black_24dp);
+
     @Inject
     ViewModelFactory viewModelFactory;
 
@@ -84,10 +88,7 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
 
 
-    private CustomStateOptions networkCustom=new CustomStateOptions().image(R.drawable.ic_cloud_off_black_24dp);
-    private CustomStateOptions noDataCustom=new CustomStateOptions().image(R.drawable.ic_error_outline_black_24dp);
 
-    private CustomStateOptions noGPSCustom=new CustomStateOptions().image(R.drawable.ic_gps_off_black_24dp);
 
 
 
@@ -252,17 +253,16 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        dialog.cancel();
-                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                    }
+                .setPositiveButton("Yes", (dialogInterface, i) -> {
+                    dialogInterface.cancel();
+                    startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        dialog.cancel();
-                    }
+
+                .setNegativeButton("No",(dialogInterface, i) -> {
+                    dialogInterface.cancel();
+
                 });
+
         final AlertDialog alert = builder.create();
         alert.show();
     }
@@ -323,14 +323,11 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
         statefulLayout.showCustom(networkCustom.message("Oooopss...  Check your Connection")
                 .buttonText("Try Again")
-                .buttonClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (isOnline){
-                            getVenues(currentLocation);
-                        }else {
-                            Toasty.warning(MainActivity.this,"Check your Connection").show();
-                        }
+                .buttonClickListener(view -> {
+                    if (isOnline){
+                        getVenues(currentLocation);
+                    }else {
+                        Toasty.warning(MainActivity.this,"Check your Connection").show();
                     }
                 }));
         isLoading=false;
@@ -342,12 +339,7 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
         statefulLayout.showCustom(networkCustom.message("something went wrong ...")
                 .buttonText("Try Again")
-                .buttonClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       getVenues(currentLocation);
-                    }
-                }));
+                .buttonClickListener(view -> getVenues(currentLocation)));
 
         isLoading=false;
 
@@ -360,12 +352,7 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
             statefulLayout.showCustom(noGPSCustom.message("Oooopss...  Check your GPS")
                     .buttonText("Try Again")
-                    .buttonClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            checkGPS();
-                        }
-                    }));
+                    .buttonClickListener(view ->  checkGPS()));
 
             isLoading=false;
         }
