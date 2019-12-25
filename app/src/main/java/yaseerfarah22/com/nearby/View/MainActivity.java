@@ -87,15 +87,6 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
 
 
-
-
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -226,8 +217,6 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
     @Override
     protected void onStop() {
-
-
         venuesViewModel.getLocationLiveData().removeObservers(this);
         venuesViewModel.getVenuesLiveData().removeObservers(this);
         venuesViewModel.getIsRealtimeLiveData().removeObservers(this);
@@ -236,8 +225,6 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
         unregisterReceiver(gpsReceiver);
 
         venuesCardViewAdapter.updateVenuesList(new ArrayList<>());
-
-
         super.onStop();
 
     }
@@ -269,8 +256,6 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
     @Override
     public boolean checkGPS(){
-
-
         boolean permissionCheck1 = ContextCompat.checkSelfPermission(MainActivity.this, reqPermissions[0]) ==
                 PackageManager.PERMISSION_GRANTED;
         boolean permissionCheck2 = ContextCompat.checkSelfPermission(MainActivity.this, reqPermissions[1]) ==
@@ -296,19 +281,13 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-
         if (requestCode==this.REQUEST_CODE){
-
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED&&isOnline) {
                 statefulLayout.showLoading("");
                 isLoading=true;
                 venuesViewModel.reActiveLocation();
-
             }
-
         }
-
-
     }
 
 
@@ -320,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
     @Override
     public void networkFailed(){
-
         statefulLayout.showCustom(networkCustom.message("Oooopss...  Check your Connection")
                 .buttonText("Try Again")
                 .buttonClickListener(view -> {
@@ -331,12 +309,10 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
                     }
                 }));
         isLoading=false;
-
     }
 
     @Override
     public void somethingWrong(){
-
         statefulLayout.showCustom(networkCustom.message("something went wrong ...")
                 .buttonText("Try Again")
                 .buttonClickListener(view -> getVenues(currentLocation)));
@@ -347,7 +323,6 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
     @Override
     public void noGPS(){
-
         if (!checkGPS()){
 
             statefulLayout.showCustom(noGPSCustom.message("Oooopss...  Check your GPS")
@@ -356,26 +331,20 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
 
             isLoading=false;
         }
-
     }
 
     @Override
     public void noDataFound(){
-
         statefulLayout.showCustom(noDataCustom.message("No Data Found"));
         isLoading=false;
-
     }
 
 
     private void getVenues(android.location.Location location){
-
      if (location!=null){
-
             if (currentLocation==location&&currentVenues.size()>0){
                 statefulLayout.showContent();
             }else{
-
                 if (isOnline) {
                     if (!isLoading){
                     statefulLayout.showLoading("");}
@@ -384,12 +353,9 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
                     networkFailed();
                 }
             }
-
         }else {
             statefulLayout.showLoading("");
             isLoading=true;
         }
     }
-
-
 }

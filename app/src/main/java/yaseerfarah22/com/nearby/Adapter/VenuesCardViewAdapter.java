@@ -29,12 +29,6 @@ public class VenuesCardViewAdapter extends RecyclerView.Adapter<VenuesCardViewAd
     private List<Venue> venueInfo;
 
 
-
-
-
-
-
-
     public VenuesCardViewAdapter(Context context) {
         this.context = context;
         this.venueInfo=new ArrayList<>();
@@ -46,11 +40,7 @@ public class VenuesCardViewAdapter extends RecyclerView.Adapter<VenuesCardViewAd
     @Override
     public Pro_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-
-
              view = LayoutInflater.from(parent.getContext()).inflate(R.layout.nearby_cardview, parent, false);
-
-
         return new Pro_holder(view);
     }
 
@@ -58,9 +48,6 @@ public class VenuesCardViewAdapter extends RecyclerView.Adapter<VenuesCardViewAd
     @Override
     public void onBindViewHolder(@NonNull Pro_holder holder, int position, @NonNull List<Object> payloads) {
         if (payloads.size()>0){
-
-
-
             Bundle bundle=(Bundle)payloads.get(0);
 
             for (String key:bundle.keySet()){
@@ -71,9 +58,6 @@ public class VenuesCardViewAdapter extends RecyclerView.Adapter<VenuesCardViewAd
                     holder.address.setText(bundle.getString(key));
                 }
             }
-
-
-
         }else {
             super.onBindViewHolder(holder, position, payloads);
         }
@@ -81,11 +65,6 @@ public class VenuesCardViewAdapter extends RecyclerView.Adapter<VenuesCardViewAd
 
     @Override
     public void onBindViewHolder(@NonNull final Pro_holder holder, final int position) {
-
-
-
-
-
         Glide.with(context).load(venueInfo.get(holder.getAdapterPosition()).getImgUrl()).into(holder.imageView);
         holder.title.setText(venueInfo.get(holder.getAdapterPosition()).getName());
         holder.address.setText(venueInfo.get(holder.getAdapterPosition()).getLocation().getAddress());
@@ -100,29 +79,22 @@ public class VenuesCardViewAdapter extends RecyclerView.Adapter<VenuesCardViewAd
 
 
     public void updateVenuesList(List<Venue> venueList){
-
-
         VenueDiffUtil venueDiffUtil=new VenueDiffUtil(context,this.venueInfo,venueList);
         DiffUtil.DiffResult diffResult= DiffUtil.calculateDiff(venueDiffUtil);
-
         this.venueInfo.clear();
         this.venueInfo.addAll(venueList);
         diffResult.dispatchUpdatesTo(this);
-
     }
 
 
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-
         venueInfo.clear();
-
     }
 
     //////////////////////////////////////////////////////////
     public class Pro_holder extends RecyclerView.ViewHolder{
-
         ImageView imageView;
         TextView title,address;
 
@@ -131,10 +103,7 @@ public class VenuesCardViewAdapter extends RecyclerView.Adapter<VenuesCardViewAd
            imageView =(ImageView) itemView.findViewById(R.id.card_image);
            title=(TextView) itemView.findViewById(R.id.card_title);
            address=(TextView) itemView.findViewById(R.id.card_address);
-
-
         }
     }
-
 
 }

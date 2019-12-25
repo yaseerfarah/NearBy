@@ -50,13 +50,10 @@ public class LocationLiveData extends MediatorLiveData<MaybeLocation> {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-
                 if (locationResult!=null){
                     postValue(new MaybeLocation(true,locationResult.getLastLocation()));
                 }else {
-
                     postValue(new MaybeLocation(false,null));
-
                 }
 
             }
@@ -70,29 +67,19 @@ public class LocationLiveData extends MediatorLiveData<MaybeLocation> {
             }
         };
 
-
-
     }
 
 
     @Override
     protected void onActive() {
         super.onActive();
-
         onActiveLocation(realTime);
-
     }
 
     @Override
     protected void onInactive() {
-
-
-        stopRealTimeLocation();
-
         super.onInactive();
-
-
-
+        stopRealTimeLocation();
     }
 
 
@@ -117,7 +104,6 @@ public class LocationLiveData extends MediatorLiveData<MaybeLocation> {
 
     private void stopRealTimeLocation(){
         if (mFusedLocationClient!=null&&realTime){
-            Toasty.error(context,"stop").show();
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
         }
     }
@@ -126,21 +112,17 @@ public class LocationLiveData extends MediatorLiveData<MaybeLocation> {
         if (ActivityCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location!=null){
-                        postValue(new MaybeLocation(true,location));
-                    }else {
-                        postValue(new MaybeLocation(false,null));
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+                if (location!=null){
+                    postValue(new MaybeLocation(true,location));
+                }else {
+                    postValue(new MaybeLocation(false,null));
 
-                    }
                 }
-            }).addOnFailureListener((var1)->{
+                    }
+            ).addOnFailureListener((var1)->{
                 Toasty.error(context,"false").show();
                 postValue(new MaybeLocation(false,null));
-
-
 
             });
         }
@@ -149,10 +131,7 @@ public class LocationLiveData extends MediatorLiveData<MaybeLocation> {
 
 
     public void setOnRealTimeLocation(boolean realTime){
-
-
-
-        onActiveLocation(realTime);
+           onActiveLocation(realTime);
 
     }
 
@@ -170,9 +149,7 @@ public class LocationLiveData extends MediatorLiveData<MaybeLocation> {
             }
 
         }else {
-
             postValue(new MaybeLocation(false,null));
-
         }
 
         this.realTime=isRealTime;
@@ -188,9 +165,7 @@ public class LocationLiveData extends MediatorLiveData<MaybeLocation> {
 
             return true;
         }
-
         return false;
-
     }
 
 }
