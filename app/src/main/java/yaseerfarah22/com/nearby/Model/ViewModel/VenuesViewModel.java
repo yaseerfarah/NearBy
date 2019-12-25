@@ -95,6 +95,7 @@ public class VenuesViewModel extends ViewModel {
 
 
     public void reActiveLocation(){
+
         locationLiveData.onActiveLocation(realTimeLocation);
     }
 
@@ -108,8 +109,8 @@ public class VenuesViewModel extends ViewModel {
                 .flatMap(Observable::fromIterable)
                 .map(GroupsItem::getItems)
                 .flatMap(Observable::fromIterable)
-                .flatMap(itemsItem -> getVenuePhotoObservable(itemsItem.getVenue()))
-                //.map(itemsItem -> itemsItem.getVenue())
+                //.flatMap(itemsItem -> getVenuePhotoObservable(itemsItem.getVenue()))
+                .map(itemsItem -> itemsItem.getVenue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onNextVenue, this::onError, this::onCompleteVenues));
 
