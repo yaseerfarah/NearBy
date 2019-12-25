@@ -9,7 +9,7 @@ User should be able to switch between the two modes, default mode is “Realtime
 
 Using:
 
--MVVM Architecture pattern.
--Dagger2 Dependency Injection.
--Retrofit.
--RxJava
+-MVVM Architecture pattern,
+Dagger2 Dependency Injection,
+Retrofit,
+RxJava.
